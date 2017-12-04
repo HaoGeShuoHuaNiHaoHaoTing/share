@@ -34,12 +34,17 @@
         //     console.log(a, b, c);
         // }, 2)
 
-        var arr = [1, [2, [3]],
-            [4, 5]
-        ];
+        // var arr = [1, [2, [3]],
+        //     [4, 5]
+        // ];
 
-        var brr = arr.concat.apply([], arr);
-        console.log(brr);
+        // var brr = arr.concat.apply([], arr);
+        // console.log(brr);
+
+        var arr = [1, 2, 3, 4];
+        console.log($.grep(arr, function(value, index) {
+            return value > 3;
+        }, true));
     </script>
 </body>
 

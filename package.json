@@ -1,0 +1,23 @@
+{
+  "name": "haoge",
+  "version": "1.0.0",
+  "description": "I will be better",
+  "main": "jquery.js",
+  "dependencies": {
+    "art-template": "^4.12.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaoGeShuoHuaNiHaoHaoTing/jquery-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HaoGeShuoHuaNiHaoHaoTing/jquery-/issues"
+  },
+  "homepage": "https://github.com/HaoGeShuoHuaNiHaoHaoTing/jquery-#readme"
+}

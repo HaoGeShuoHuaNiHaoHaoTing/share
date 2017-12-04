@@ -45,19 +45,63 @@
         },
     };
 
-    var init = jQuery.fn.init = function() {
-        if (!selector) {
-            return this;
-        }
+    // 在介绍下面的内容之前，先来介绍一个 jQuery 中一个识别 Html 字符串的正则表达式，
+    // var rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/;
+    // rquickExpr.exec('<div>') //["<div>", "<div>", undefined]
+    // rquickExpr.exec('<div></div>') //["<div></div>", "<div></div>", undefined]
+    // quickExpr.exec('#id') //["#id", undefined, "id"]
+    // rquickExpr.exec('.class') //null
+    // 上面这一系列的正则表达式 exec，只是为了说明 rquickExpr 这个正则表达式执行后的结果，首先，如果匹配到，结果数组的长度是 3，如果匹配到 <div> 这种 html，数组的第三个元素是 underfined，如果匹配到 #id，数组的第二个元素是 underfined，如果匹配不到，则为 null。
+    // 另外还有一个正则表达式：
+    // var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
+    // rsingleTag.test('<div></div>') //true
+    // rsingleTag.test('<div ></div>') //true
+    // rsingleTag.test('<div class="cl"></div>') //false
+    // rsingleTag.test('<div></ddiv>') //false
 
-        if (typeof selector === "string") {
+    var rootjQuery,
+        rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/,
+        init = jQuery.fn.init = function(selector, context, root) {
+            var match, elem;
 
-        } else if (selector.nodeType) {
+            // 处理$(''), $(null), $(undefined), $(false), $('')
+            if (!selector) {
+                return this; // 返回一个空的jQuery对象
+            }
 
-        } else if (jQuery.isFunction(selector)) {
+            root = root || rootjQuery; // 给个默认值，document
+            // 处理html字符串情况，包括$('<div>), $('#id'), $('.class')
+            if (typeof selector === "string") {
+                if (selector[0] === "<" && // 如果是 `<...>` 这样
+                    selector[selector - 1] === ">" &&
+                    selector.length >= 3) {
 
-        }
-    }
+                    match = [null, selector, null]; // 正则看不懂
+
+                } else {
+                    match = rquickExpr.exec(selector);
+                }
+
+                if (match && (match[1] || !context)) {
+
+                }
+
+            } else if (selector.nodeType) { // 通过nodeType 判断是否是 Dom元素
+                this[0] = selector;
+                this.length = 1;
+                return this;
+            } else if (jQuery.isFunction(selector)) { // 如果传入是函数（document ready的捷径）
+                return root.ready !== undefined ? // 如果document.ready 存在
+                    root.ready(selector) :
+                    selector(jQuery) // 如果没有ready， 就直接执行
+            }
+
+            return jQuery.markeArray(selector, this);
+        };
+    // jQuery 是 jQuery.fn.init 的实例， 继承init的 原型， init.prototype 又等于 jQuery.fn, 又等于jQuery.prototype, 这样，jQuery对象就可以调用 jQuery的prototype中方法了
+    init.prototype = jQuery.fn;
+    // 初始化中央参考
+    rootjQuery = jQuery(document);
 
     // 用来往jQuery中扩展方法
     jQuery.extend = jQuery.fn.extend = function() {
@@ -223,7 +267,25 @@
                     push.call(ret, arr);
                 }
             }
+        },
+        grep: function(elems, callback, invert) { // 选择出，满足条件的 数组中的元素
+            var callbackInverse,
+                matches = [],
+                i = 0,
+                length = elems.length,
+                callbackExpect = !invert;
+            // 如果传true, 就把返回false 的返回
+            for (; i < length; i++) {
+                callbackInverse = !callback(elems[i], i);
+                if (callbackInverse !== callbackExpect) { // 如果传true, 就取反
+                    matches.push(elems[i]);
+                }
+            }
+            return matches;
         }
+
+    })
+    jQuery.extend({
 
     })
     jQuery.each("Boolean Number String Function Array Date RegExp Object Error Symbol".split(" "),
