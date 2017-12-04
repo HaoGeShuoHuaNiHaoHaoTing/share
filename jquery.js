@@ -197,7 +197,7 @@
         splice: arr.splice
     };
 
-    jQuery.extend = jQuery.fn.extend = function() {
+    jQuery.extend = jQuery.fn.extend = function() { // 往jquery 和 jQuery.fn 上面扩展
         var options, name, src, copy, copyIsArray, clone,
             target = arguments[0] || {},
             i = 1,
@@ -205,7 +205,7 @@
             deep = false;
 
         // Handle a deep copy situation
-        if (typeof target === "boolean") {
+        if (typeof target === "boolean") { // 如果第一个参数是布尔值
             deep = target;
 
             // Skip the boolean and the target
@@ -214,7 +214,7 @@
         }
 
         // Handle case when target is a string or something (possible in deep copy)
-        if (typeof target !== "object" && !jQuery.isFunction(target)) {
+        if (typeof target !== "object" && !jQuery.isFunction(target)) { // 不是对象，也不是函数
             target = {};
         }
 
@@ -470,7 +470,7 @@
                 }
             }
 
-            // Flatten any nested arrays  使任意嵌套数组变平
+            // Flatten any nested arrays  使任意嵌套数组变平 只能变一级
             return concat.apply([], ret);
         },
 
