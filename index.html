@@ -41,10 +41,24 @@
         // var brr = arr.concat.apply([], arr);
         // console.log(brr);
 
-        var arr = [1, 2, 3, 4];
-        console.log($.grep(arr, function(value, index) {
-            return value > 3;
-        }, true));
+        // var arr = [1, 2, 3, 4];
+        // console.log($.grep(arr, function(value, index) {
+        //     return value > 3;
+        // }, true));
+        // var str = "Is is the cost of of gasoline going up up";
+        // var patt1 = /\b([A-Z]+) \1\b/ig;
+        // // document.write(str.match(patt1));
+        // console.log(str.match(patt1));
+
+
+        var str = "http://www.runoob.com:80/html/html-tutorial.html";
+        var patt1 = /(\w+):\/\/([^/:]+)(:\d*)?([^# ]*)/;
+        arr = str.match(patt1);
+        for (var i = 0; i < arr.length; i++) {
+            console.log(arr[i]);
+        }
+        var patt1 = /(\w+):\/\/([^/:]+)(:\d*)?([^# ])/;
+        var patt1 = /(\w+):\/\/([^/:]+)(:\d*)?([^# ])/;
     </script>
 </body>
 

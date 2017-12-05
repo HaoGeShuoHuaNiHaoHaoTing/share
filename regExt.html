@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    正则：
+    <script>
+        // 1. ?: ?=  ?!
+        // 这三个都是非获取匹配
+
+        // ?: 非匹配 有 非匹配的好处，比如在 或判断 的时候
+        // industr(?:y|ies) => industry|industries
+
+        // ?= 正向肯定预查
+        // window(?=95|98|NT|2000) 能匹配 window2000中的 window，但不能匹配window3.1中的 window
+        // 主要目的是要匹配window，必须满足?= 中的条件
+
+        // ?! 正向否定预查
+        // window(?=95|98|NT|2000) 能匹配 window3.1中的 window，但不能匹配window2000中的 window
+        // 主要目的是要匹配window，必须不能满足?! 中的条件
+
+        // ?<=  反向肯定预查
+        // 与 ?= 类似，只是方向相反，判断条件放在前面
+        // (?<=95|98|NT|2000)window 能匹配2000window 中的 window，但不能匹配3.1window 中的 window
+
+        // ?<!  反向否定预查
+        // 与 ?! 类似，只是方向相反，判断条件放在前面
+        // (?<!95|98|NT|2000)window  能匹配3.1window中的 window，但不能匹配2000window 中的 window
+    </script>
+</body>
+
+</html>
