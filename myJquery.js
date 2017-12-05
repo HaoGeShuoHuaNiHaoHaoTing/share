@@ -2,10 +2,22 @@
 
     // 这个地方，缺commonJS module.exports
     // 将来补上
+    "use strict";
 
-    factory(global);
+    if (typeof module === "object" && typeof module.exports === "object") {
+        module.exports = global.document ?
+            factory(global, true) :
+            function(w) {
+                if (!w.document) {
+                    throw new Error("jQuery requires a window with a document");
+                }
+                return factory(w);
+            }
+    } else {
+        factory(global);
+    }
 
-})(window, function(window) {
+})(typeof window !== "undefined" ? window : this, function(window, noGlobal) {
 
     var version = "3.2.1",
         jQuery = function(selector, context) {
@@ -303,6 +315,33 @@
         return type === "array" || length === 0 ||
             typeof length === "number" && length > 0 && (length - 1) in obj;
     }
-    window.jQuery = window.$ = jQuery;
+
+    if (typeof define === "function" && define.amd) { // 定义一个模块‘jquery’， 依赖于[ ]， 
+        define("jquery", [], function() {
+            return jQuery;
+        })
+    }
+
+
+
+
+    var
+        _jQuery = window.jQuery, // 在覆盖的情况下映射$
+        _$ = window.$; // 用内部变量保存jQuery运行之前这两个全局变量的状态, 以便在后面的防冲突操作中还原这两个变量
+
+    jQuery.noConflict = function(deep) {
+        if (window.$ === jQuery) { // 这个函数，就用来处理变量名冲突的， 如果调用了，就把$ 这个变量，赋值回去
+            window.$ = _$;
+        }
+
+        if (deep && window.jQuery === jQuery) { // 如果传入deep， 不仅$ 符号要变回去，jQuery也要变回去
+            window.jQuery = _jQuery;
+        }
+    }
+
+
+    if (!noGlobal) { // 这是最大函数中传得第二个参数，在module.exports 中传true，没进入判断
+        window.jQuery = window.$ = jQuery;
+    }
     return jQuery;
 })
