@@ -2662,7 +2662,23 @@
 
     })
     jQuery.extend({
+        isReady: false, // 确保这个函数只被使用一次
 
+        readyWait: 1,
+
+        ready: function(wait) {
+            if (wait == true ? --jQuery.readyWait : jQuery.isReady) {
+                return;
+            }
+
+            jQuery.isReady = true;
+
+            if (wait !== true && --jQuery.readyWait > 0) {
+                return;
+            }
+
+            readyList.resolveWith(document, [jQuery]);
+        }
     })
     jQuery.each("Boolean Number String Function Array Date RegExp Object Error Symbol".split(" "),
         function(i, name) {
