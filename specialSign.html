@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        // >> 与 >>> 是一样的
+        // n = n >> 1;  相当于将n 除以2 取其商
+        // 数学意义： 右移一位相当于除以2， 右移n位， 相当于除以2的 n次方
+
+
+        // 1 << 24 ,1 左移24位， 就是2 的24次方
+
+        // let num = 101;
+
+        // console.log(num >> 1); // 50
+        // console.log(num >> 2); // 25
+        // console.log(num >> 3); // 12
+        // console.log(num >> 4); // 6
+        // console.log(num >> 5); // 3
+
+        // console.log(num >>> 1); // 50
+        // console.log(num >>> 2); // 25
+        // console.log(num >>> 3); // 12
+        // console.log(num >>> 4); // 6
+        // console.log(num >>> 5); // 3
+
+
+
+        // 随机颜色
+        // console.log(parseInt(~~(Math.random() * (1 << 24)), 10).toString(16))
+        // console.log(~~(Math.random() * (1 << 24)))
+
+        // console.log((parseInt('FFFFFF', 16) + 1) >> 23); // 2
+        // console.log((parseInt('FFFFFF', 16) + 1) >> 24); // 1
+
+        // 监测n 是否为非负整数
+        // if( n === (n >>> 0)) { }
+
+        // let num1 = -10;
+        // console.log(num1 >>> 0) // 4294967286
+        // console.log(num1 >> 0) // -10 没有发生任何变化
+        // console.log(num1 << 0) // -10 没有发生任何变化
+
+        // let num2 = 10.8;
+        // console.log(num2 >>> 0) // 10
+        // console.log(num2 >> 0) // 10
+        // console.log(num2 << 0) // 10
+
+        // let num3 = -10.2;
+        // console.log(num3 >>> 0) // 4294967286
+        // console.log(num3 >> 0) // -10
+        // console.log(num3 << 0) // -10
+
+        // >> << 可以用来取整
+        // >>> 没问题 <<< 会报错
+    </script>
+</body>
+
+</html>
