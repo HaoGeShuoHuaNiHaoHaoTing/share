@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // console.log(navigator.userAgent); //Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36
+        // console.log(!!(window.chrome && window.google))
+        // console.log(document.all + '');
+        // console.log(typeof document.all);
+        // console.log(!!document.all)
+        // console.log('all' in document);
+
+        // console.log(Object.prototype);
+
+
+        // ------------------      构造函数         -----------------------
+        // function A() {}
+
+        // A.prptotype = {
+        //     aa: function() {
+        //         console.log(1);
+        //     }
+        // }
+
+        // function bridge() {}
+
+        // bridge.prototype = A.prototype;
+
+        // function B() {}
+
+        // B.prototype = new bridge();
+
+        // var a = new A;
+        // var b = new B;
+
+        // console.log(A.prototype === B.prototype); // false
+        // console.log(a.aa === b.aa); // true
+
+        // A.prototype.bb = function() {
+        //     console.log(2);
+        // }
+
+        // console.log(a.bb === b.bb); // true
+
+        // B.prototype.cc = function() {
+        //     console.log(3);
+        // }
+
+        // console.log(a.cc === b.cc); // false
+        // console.log(b instanceof A) // true
+        // console.log(b instanceof B) // true
+
+        //  -------------------  Object.create    ------------------
+        Object.create = function(o) {
+            function F() {};
+            F.prototype = o;
+            return new F();
+        }
+    </script>
+</body>
+
+</html>
