@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="./myJquery.js"></script>
+    <!-- <script src="./myJquery.js"></script> -->
+    <script src="jquery.js">
+    </script>
 </head>
 
 <body>
@@ -67,6 +69,9 @@
         // }
         // var patt1 = /(\w+):\/\/([^/:]+)(:\d*)?([^# ])/;
         // var patt1 = /(\w+):\/\/([^/:]+)(:\d*)?([^# ])/;
+        $(function(args) {
+            alert("ready" + this + "->" + args);
+        })
     </script>
 </body>
 

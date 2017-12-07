@@ -10,7 +10,7 @@
 
 <body>
     正则：
-    <script>
+     <script> 
         // 1. ?: ?=  ?!
         // 这三个都是非获取匹配
 
@@ -32,6 +32,29 @@
         // ?<!  反向否定预查
         // 与 ?! 类似，只是方向相反，判断条件放在前面
         // (?<!95|98|NT|2000)window  能匹配3.1window中的 window，但不能匹配2000window 中的 window
+
+        // ---------------------------量词： 贪婪量词/惰性量词-------------------------------
+        // 贪婪量词， 惰性量词与支配性量词
+
+        // 贪婪量词， 上面提到的所有简单量词。 就像成语中说的巴蛇吞象那样， 一口吞下整个字符串， 发现吞不下（ 匹配不了）， 再从后面一点点吐出来（ 去掉最后一个字符， 再看这时这个整个字符串是否匹配， 不断这样重复直到长度为零）
+
+        // 隋性量词， 在简单量词后加问号。 由于太懒了， 先吃了前面第一个字符， 如果不饱再捏起多添加一个（ 发现不匹配， 就读下第二个， 与最初的组成一个有两个字符串的字符串再尝试匹配， 如果再不匹配， 再吃一个组成拥有三个字符的字符串……）。 其工作方式与贪婪量词相反。
+
+        // 支配性量词， 在简单量词后加加号。 上面两种都有个不断尝试的过程， 而支配性量词却只尝试一次， 不合口味就算了。 就像一个出身高贵居支配地位的公主。 但你也可以说它是最懒量词。 由于javascript不支持， 所以它连出场的机会也没有了。
+
+        // var re1 = /.*bbb/g; //贪婪
+        // var re2 = /.*?bbb/g; //惰性
+        // //  var re3 = /.*+bbb/g;//支配性,javascript不支持，IE与所有最新的标准浏览器都报错
+
+        // alert(re1.test("abbbaabbbaaabbbb1234") + ""); //true
+        // alert(re1.exec("abbbaabbbaaabbbb1234") + ""); //null
+        // alert("abbbaabbbaaabbbb1234".match(re1) + ""); //abbbaabbbaaabbbb
+
+        // alert(re2.test("abbbaabbbaaabbbb1234") + ""); //true
+        // alert(re2.exec("abbbaabbbaaabbbb1234") + ""); //aabbb
+        // alert("abbbaabbbaaabbbb1234".match(re2) + ""); //abbb,aabbb,aaabbb
+
+        console.log("mon and dad".match(/(mon( and dad)?)/))
     </script>
 </body>
 

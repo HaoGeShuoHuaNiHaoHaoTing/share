@@ -3910,7 +3910,7 @@
         ready: function(wait) {
 
             // Abort if there are pending holds or we're already ready
-            if (wait === true ? --jQuery.readyWait : jQuery.isReady) {
+            if (wait === true ? --jQuery.readyWait : jQuery.isReady) { // 如果等待，或者已经等待后了，跳过
                 return;
             }
 
@@ -3930,7 +3930,7 @@
     jQuery.ready.then = readyList.then;
 
     // The ready event handler and self cleanup method
-    function completed() {
+    function completed() { // dom 完成后触发，去除绑定的函数
         document.removeEventListener("DOMContentLoaded", completed);
         window.removeEventListener("load", completed);
         jQuery.ready();
@@ -3943,16 +3943,17 @@
     if (document.readyState === "complete" ||
         (document.readyState !== "loading" && !document.documentElement.doScroll)) {
 
+            // 如果dom 已经加载完了， 我们不再触发complete事件， 直接走ready
         // Handle it asynchronously to allow scripts the opportunity to delay ready
         window.setTimeout(jQuery.ready);
 
     } else {
 
         // Use the handy event callback
-        document.addEventListener("DOMContentLoaded", completed);
+        document.addEventListener("DOMContentLoaded", completed); // 给文档添加 DOMContentLoaded 事件
 
         // A fallback to window.onload, that will always work
-        window.addEventListener("load", completed);
+        window.addEventListener("load", completed); // 如果 DOMContentLoaded 不执行，以此为备用，总是执行
     }
 
 
