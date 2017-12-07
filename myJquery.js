@@ -2361,11 +2361,50 @@
         return matched;
     };
 
-    var rneedsContext = jQuery.expr.match.needsContext;
+    var rneedsContext = jQuery.expr.match.needsContext; // ??????????????
 
     function nodeName(elem, name) { // 判断elem的nodeName 与 name 是否相同
 
         return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
+
+    }
+
+    var risSimple = /^.[^:#\[\.,]*$/; // 以任意字符开头，但是第二个字符不能是 :#[.,
+
+    // 实现             相同的         功能性
+    // Implement the identical functionality for filter and not 辨别
+    function winnow(elements, qualifier, not) { // not -> false/true
+        if (jQuery.isFunction(qualifier)) { // 如果传进来函数
+            return jQuery.grep(elements, function(elem, i) { // 就把满足函数的，返回
+                // !!是把undefined null 转化成false
+                return !!qualifier.call(elem, i, elem) !== not; // 如果传进来true， 就取反
+            })
+        }
+        // 传入 单一元素
+        if (qualifier.nodeType) {
+            return jQuery.grep(elements, function(elem) {
+                return (elem === qualifier) !== not;
+            })
+        }
+        // Arraylike of elements (jQuery, arguments, Array)
+        if (typeof qualifier !== "string") {
+            return jQuery.grep(elements, function(elem) {
+                return (indexOf.call(qualifier, elem) > -1) !== not; // 返回包含于qualifier中的元素
+            })
+        }
+
+        if (risSimple.test(qualifier)) { //匹配成功：.box，#div1，:odd ，ul，li，div
+            return jQuery.filter(qualifier, elements, not);
+        }
+
+        //匹配不成功div:odd，ul #li，ul[title=‘hello‘]，div.box，ul,li
+        qualifier = jQuery.filter(qualifier, elements);
+        return jQuery.grep(elements, function(elem) {
+            return (indexOf.call(qualifier, elem) > -1) !== not && elem.nodeType === 1;
+        })
+    }
+
+    jQuery.filter = function(expr, elems, not) {
 
     }
 
