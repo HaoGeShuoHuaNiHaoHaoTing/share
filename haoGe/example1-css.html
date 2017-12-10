@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Montserrat:400);
+        * {
+            margin: 0;
+            padding: 0;
+            cursor: default;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Montserrat, sans-serif;
+            font-size: .75rem;
+            background: hsl(0, 0%, 10%);
+        }
+        
+        h1 {
+            position: relative;
+            font-weight: 400;
+            margin: 3em 2em;
+            color: hsla(30, 0%, 50%, .5);
+            transition: .25s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+            text-align: center;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        
+        h1:hover {
+            color: hsla(30, 90%, 60%, 1);
+        }
+        
+        .bullet {
+            /*[position the bullets]*/
+            position: absolute;
+            top: 0%;
+            left: 50%;
+            transform: translate(-50%, -200%);
+            /*[size the bullets]*/
+            width: 1rem;
+            height: 1rem;
+            transition: .25s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+            perspective: 4.5rem;
+            pointer-events: none;
+        }
+        
+        .cube {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            transition: .25s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+            transform-style: preserve-3d;
+        }
+        
+        .back,
+        .front,
+        .left,
+        .right,
+        .top,
+        .bottom {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            font-size: 2rem;
+            background: hsla(30, 0%, 0%, .65);
+            border: .15rem solid hsla(30, 90%, 60%, .5);
+            text-transform: uppercase;
+            transition: .25s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+        }
+        
+        .back {
+            transform: translateZ(-.5rem) rotateY(180deg);
+        }
+        
+        .front {
+            transform: translateZ(.5rem);
+        }
+        
+        .left {
+            transform: translateX(-.5rem) rotateY(-90deg);
+        }
+        
+        .right {
+            transform: translateX(.5rem) rotateY(90deg);
+        }
+        
+        .top {
+            transform: translateY(-.5rem) rotateX(90deg);
+        }
+        
+        .bottom {
+            transform: translateY(.5rem) rotateX(90deg);
+        }
+        
+        .x:hover .bullet,
+        .y:hover .bullet,
+        .z:hover .bullet {
+            width: 2rem;
+            height: 2rem;
+            transform: translate(-50%, -150%);
+        }
+        
+        .x.exp:hover .bullet,
+        .y.exp:hover .bullet,
+        .z.exp:hover .bullet {
+            width: 1.25rem;
+            height: 1.25rem;
+            transform: translate(-50%, -200%);
+        }
+        
+        .x:hover .cube,
+        .y:hover .cube,
+        .z:hover .cube {
+            animation: spinXYZ 5s infinite linear;
+        }
+        
+        .x:hover .cube div,
+        .y:hover .cube div,
+        .z:hover .cube div {
+            background: hsla(30, 90%, 60%, .25);
+        }
+        
+        .x.exp:hover .cube div,
+        .y.exp:hover .cube div,
+        .z.exp:hover .cube div {
+            border-radius: 50%;
+        }
+        
+        .exp:hover .back {
+            transform: translateZ(-1rem) rotateY(180deg);
+        }
+        
+        .exp:hover .front {
+            transform: translateZ(1rem);
+        }
+        
+        .exp:hover .left {
+            transform: translateX(-1rem) rotateY(-90deg);
+        }
+        
+        .exp:hover .right {
+            transform: translateX(1rem) rotateY(90deg);
+        }
+        
+        .exp:hover .top {
+            transform: translateY(-1rem) rotateX(90deg);
+        }
+        
+        .exp:hover .bottom {
+            transform: translateY(1rem) rotateX(90deg);
+        }
+        
+        .x .cube {
+            animation: spinX 5s infinite linear;
+        }
+        
+        .y .cube {
+            animation: spinY 5s infinite linear;
+        }
+        
+        .z .cube {
+            animation: spinZ 5s infinite linear;
+        }
+        
+        @keyframes spinXYZ {
+            from {
+                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+            }
+        }
+        
+        @keyframes spinX {
+            from {
+                transform: rotateX(0deg);
+            }
+            to {
+                transform: rotateX(360deg);
+            }
+        }
+        
+        @keyframes spinY {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+        
+        @keyframes spinZ {
+            from {
+                transform: rotateZ(0deg);
+            }
+            to {
+                transform: rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="x">
+        <div class="bullet">
+            <div class="cube">
+                <div class="back"></div>
+                <div class="front"></div>
+                <div class="left"></div>
+                <div class="right"></div>
+                <div class="top"></div>
+                <div class="bottom"></div>
+            </div>
+        </div>list item x I</h1>
+    <h1 class="y">
+        <div class="bullet">
+            <div class="cube">
+                <div class="back"></div>
+                <div class="front"></div>
+                <div class="left"></div>
+                <div class="right"></div>
+                <div class="top"></div>
+                <div class="bottom"></div>
+            </div>
+        </div>list item y I</h1>
+    <h1 class="z">
+        <div class="bullet">
+            <div class="cube">
+                <div class="back"></div>
+                <div class="front"></div>
+                <div class="left"></div>
+                <div class="right"></div>
+                <div class="top"></div>
+                <div class="bottom"></div>
+            </div>
+        </div>list item z I</h1>
+    <h1 class="x exp">
+        <div class="bullet">
+            <div class="cube">
+                <div class="back"></div>
+                <div class="front"></div>
+                <div class="left"></div>
+                <div class="right"></div>
+                <div class="top"></div>
+                <div class="bottom"></div>
+            </div>
+        </div>list item x II</h1>
+    <h1 class="y exp">
+        <div class="bullet">
+            <div class="cube">
+                <div class="back"></div>
+                <div class="front"></div>
+                <div class="left"></div>
+                <div class="right"></div>
+                <div class="top"></div>
+                <div class="bottom"></div>
+            </div>
+        </div>list item y II</h1>
+    <h1 class="z exp">
+        <div class="bullet">
+            <div class="cube">
+                <div class="back"></div>
+                <div class="front"></div>
+                <div class="left"></div>
+                <div class="right"></div>
+                <div class="top"></div>
+                <div class="bottom"></div>
+            </div>
+        </div>list item z II</h1>
+</body>
+
+</html>
